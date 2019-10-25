@@ -21,5 +21,5 @@ them to Cloud Foundry, to Kubernetes, and on your local machine.
 link:https://dataflow.spring.io/docs/stream-developer-guides/streams/standalone-stream-kafka/[Stream Processing with Apache Kafka]
 
 == Summary
-Congratulations! You have learned Spring Cloud Stream's high-level overview, and you were able to build and test
+Congratulations! You have completed Spring Cloud Stream's high-level overview, and you were able to build and test
 Spring Cloud Stream applications that communicate with RabbitMQ or Apache Kafka.

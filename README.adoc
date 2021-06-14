@@ -8,17 +8,11 @@ the framework from the link:https://spring.io/projects/spring-cloud-stream[proje
 link:https://spring.io/projects/spring-cloud-stream#learn[documentation],
 and link:https://github.com/spring-cloud/spring-cloud-stream-samples[samples].
 
-=== Stream Processing with RabbitMQ
-In the following guide, we develop three Spring Boot applications that use Spring Cloud Stream's support for RabbitMQ and deploy
-them to Cloud Foundry, to Kubernetes, and on your local machine.
+=== Stream Processing with RabbitMQ and Apache Kafka
+In the following guide, we develop three Spring Boot applications that use Spring Cloud Stream's support for RabbitMQ and Apache Kafka and deploy them to Cloud Foundry, to Kubernetes, and on your local machine.
+You can use the toggle on the UI docs to switch between RabbitMQ or Apache Kafka.
 
-link:https://dataflow.spring.io/docs/stream-developer-guides/streams/standalone-stream-rabbitmq/[Stream Processing with RabbitMQ]
-
-=== Stream Processing with Apache Kafka
-In the following guide, we develop three Spring Boot applications that use Spring Cloud Stream's support for Apache Kafka and deploy
-them to Cloud Foundry, to Kubernetes, and on your local machine.
-
-link:https://dataflow.spring.io/docs/stream-developer-guides/streams/standalone-stream-kafka/[Stream Processing with Apache Kafka]
+link:https://dataflow.spring.io/docs/stream-developer-guides/streams/standalone-stream-sample/[Stream Processing with RabbitMQ and Apache Kafka]
 
 == Summary
 Congratulations! You have completed Spring Cloud Stream's high-level overview, and you were able to build and test

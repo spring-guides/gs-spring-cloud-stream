@@ -31,13 +31,13 @@ In this guide, we will demonstrate the capability of Spring Cloud Stream.  We wi
 functionalities of Spring Cloud Stream.
 
 - name-source : publish a String at a regular interval to initiate the stream.  For this example, publish a name as a String.
-- name-processor : consume the String published by name-source and transform the data in some way.  Publish the results to a different topic.
+- name-processor : consume the String published by name-source and transform the data in some way.  Publish the results to a different exchange.
 For this example, use the name String to create a record and add a timestamp.
 - name-sink : consume the results from name-processor and perform an action.  In this case, print out the results to standard out.
 
-For this example the names of the applications follow the Spring Cloud Stream concepts (source, processor, sink).  These concepts map
-to the logical equivalent of the java.util.function types (Supplier, Function, Consumer respectively).
-We need to create 3 separate applications because the respective types (Supplier, Function, Consumer) cannot live in the same application.
+For this example the names of the applications follow the Spring Cloud Stream concepts (`Source`, `Processor`, `Sink`).  These concepts map
+to the logical equivalent of the Java 8 functions (`Supplier`, Function, Consumer respectively).
+While Spring Cloud Stream can support a Function(s) in a Source  as well as Sink via function composition, we will have 3 separate applications to demonstrate how each can work as an independent application.
 
 image::stream-applications-layered-architecture.png[]
 

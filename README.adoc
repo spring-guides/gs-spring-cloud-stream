@@ -27,37 +27,37 @@ and link:https://github.com/spring-cloud/spring-cloud-stream-samples[samples].
 
 === Stream Processing Application Overview
 
-In this guide, we will demonstrate the capability of Spring Cloud Stream.  We will create 3 applications to showcase the different
+This guide demonstrates the capability of Spring Cloud Stream. We create three applications to showcase the different
 functionalities of Spring Cloud Stream.
 
-- name-source : publish a String at a regular interval to initiate the stream.  For this example, publish a name as a String.
-- name-processor : consume the String published by name-source and transform the data in some way.  Publish the results to a different exchange.
+- name-source: Publish a String at a regular interval to initiate the stream. For this example, publish a name as a String.
+- name-processor: Consume the String published by name-source and transform the data in some way. Publish the results to a different exchange.
 For this example, use the name String to create a record and add a timestamp.
-- name-sink : consume the results from name-processor and perform an action.  In this case, print out the results to standard out.
+- name-sink: Consume the results from name-processor and perform an action. In this case, print the results to standard out.
 
-For this example the names of the applications follow the Spring Cloud Stream concepts (`Source`, `Processor`, `Sink`).  These concepts map
-to the logical equivalent of the Java 8 functions (`Supplier`, Function, Consumer respectively).
-While Spring Cloud Stream can support a Function(s) in a Source  as well as Sink via function composition, we will have 3 separate applications to demonstrate how each can work as an independent application.
+For this example, the names of the applications follow the Spring Cloud Stream concepts (`Source`, `Processor`, `Sink`). These concepts map
+to the logical equivalent of the Java 8 functions (`Supplier`, `Function`, `Consumer`, respectively).
+While Spring Cloud Stream can support one or more Function instances in a Source as well as in a Sink (via function composition), we have three separate applications to demonstrate how each can work as an independent application.
 
 image::stream-applications-layered-architecture.png[]
 
-In this guide, we will work from the back to the front.  That is, we will first build the Sink application, followed by the Processor, and
-finally build the Source.  We will use the RabbitMQ dashboard UI to test each component as we go.
+In this guide, we work from the back to the front. That is, we first build the Sink application, followed by the Processor, and
+finally build the Source. We use the RabbitMQ dashboard UI to test each component as we go.
 
 === Install Prerequisite - RabbitMQ
 
-In order to use Spring Cloud Stream functionality, we need to ensure that a message broker is accessible.  For this guide we will use RabbitMQ.
-If a local Docker environment is found, the following command can start RabbitMQ
+To use Spring Cloud Stream functionality, we need to ensure that a message broker is accessible. For this guide, we use RabbitMQ.
+If a local Docker environment is found, the following command can start RabbitMQ:
 ```shell
 docker run -d --hostname my-rabbit --name some-rabbit -p 15672:15672 -p 5672:5672 rabbitmq:3-management
 ```
 
-The result is that RabbitMQ should be link:http://localhost:15672/[accessible locally] with the username/password of guest/guest.
+The result is that RabbitMQ should be link:http://localhost:15672/[accessible locally] with the username/password of `guest/guest`.
 
 
 == Sink Application
 
-The sink (`java.util.function.Consumer`) is defined in `NameSinkConfiguration` as
+The sink (`java.util.function.Consumer`) is defined in `NameSinkConfiguration` as:
 
 ====
 [source,java,tabsize=2,indent=0]
@@ -66,8 +66,8 @@ include::name-sink/src/main/java/com/example/stream/namesink/NameSinkConfigurati
 ----
 ====
 
-Starting this application without configuring the exchange name will automatically generate an exchange in RabbitMQ titled `nameSink-in-0`.
-We want to customize this so that we can later hook our processor to our sink.
+Starting this application without configuring the exchange name automatically generates an exchange named `nameSink-in-0` in RabbitMQ.
+We want to customize this exchange so that we can later hook our processor to our sink.
 
 ====
 [source,tabsize=2,indent=0]
@@ -77,11 +77,11 @@ include::name-sink/src/main/resources/application.properties[tag=sinkexchangecon
 ====
 
 
-To test the sink we will manually publish a JSON message representing a `Person` record to the newly generated exchange:
+To test the sink, we manually publish a JSON message representing a `Person` record to the newly generated exchange:
 
 image::rabbitmq-sink.png[]
 
-And in our application logs we should see the data outputted:
+Also, in our application logs we should see the data outputted:
 
 image::output-sink.png[]
 
@@ -89,7 +89,7 @@ image::output-sink.png[]
 
 == Processor Application
 
-The processor (`java.util.function.Function`) is defined in `NameProcessorConfiguration` as
+The processor (`java.util.function.Function`) is defined in `NameProcessorConfiguration` as:
 
 ====
 [source,java,tabsize=2,indent=0]
@@ -98,10 +98,10 @@ include::name-processor/src/main/java/com/example/stream/nameprocessor/NameProce
 ----
 ====
 
-This function will take a String value as input and create a new Person record that adds the timestamp of when the data was processed.
-Running this application will create 2 new exchanges in RabbitMQ: `processName-in-0` and `processName-out-0`.
+This function takes a String value as input and creates a new Person record that adds the timestamp of when the data was processed.
+Running this application creates two new exchanges in RabbitMQ: `processName-in-0` and `processName-out-0`.
 Similar to the configuration we applied to the sink application, we want to change these exchange names so they can hook into the
-sink and soon to the supplier.
+sink and, soon, to the supplier.
 
 ====
 [source,tabsize=2,indent=0]
@@ -112,18 +112,18 @@ include::name-processor/src/main/resources/application.properties[tag=processore
 
 NOTE: The output of the processor matches the input of the sink.
 
-Using the RabbitMQ dashboard, we will now send a String (name) to the processor input exchange and watch as it flows to the connected sink.
+Using the RabbitMQ dashboard, we can now send a String (name) to the processor input exchange and watch as it flows to the connected sink.
 
 image::rabbitmq-processor.png[]
 
-If the processor and the sink are connected properly, you should still the output from your running sink:
+If the processor and the sink are connected properly, you should see the output from your running sink:
 
 image::output-processor-sink.png[]
 
 == Source Application
 
 
-The Source (`java.util.function.Supplier`) is defined in `NameSourceConfiguration` as
+The Source (`java.util.function.Supplier`) is defined in `NameSourceConfiguration` as:
 
 ====
 [source,java,tabsize=2,indent=0]
@@ -142,12 +142,12 @@ include::name-source/src/main/resources/application.properties[tag=supplierexcha
 ----
 ====
 
-NOTE: The output of the source should matches the input of the processor
+NOTE: The output of the source should match the input of the processor.
 
-If `name-processor` and `name-sink` are already running, starting the `name-source` will immediately start messages flowing through the system.
-You should see the same name continuously outputted by `name-sink` with a slightly different timestamp for when the message
-passed through the processor.  No more RabbitMQ dashboard testing required!  You now have a fully functioning stream application.
+If `name-processor` and `name-sink` are already running, starting the `name-source` immediately starts messages flowing through the system.
+You should see the same name continuously produced by `name-sink` with a slightly different timestamp for when the message
+passed through the processor. No more RabbitMQ dashboard testing required!  You now have a fully functioning stream application.
 
 == Summary
 Congratulations! You have completed Spring Cloud Stream's high-level overview, and you were able to build and test
-Spring Cloud Stream applications that communicate with RabbitMQ or Apache Kafka.
+Spring Cloud Stream applications that communicate with RabbitMQ.

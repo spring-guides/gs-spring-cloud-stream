@@ -4,7 +4,7 @@ streaming application.
 
 == Starting with Spring Initializr
 
-You can use this https://start.spring.io/#!type=maven-project&language=java&platformVersion=3.0.1&packaging=jar&jvmVersion=17&groupId=com.example.stream&artifactId=name-sink&name=name-sink&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.stream.name-sink&dependencies=cloud-stream,amqp[pre-initialized project] and click *Generate* to download a ZIP file. This project is configured to fit the examples in this tutorial.
+You can use this https://start.spring.io/#!type=maven-project&language=java&packaging=jar&jvmVersion=17&groupId=com.example.stream&artifactId=name-sink&name=name-sink&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.stream.name-sink&dependencies=cloud-stream,amqp[pre-initialized project] and click *Generate* to download a ZIP file. This project is configured to fit the examples in this tutorial.
 
 To manually initialize the project:
 

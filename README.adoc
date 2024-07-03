@@ -39,7 +39,7 @@ For this example, the names of the applications follow the Spring Cloud Stream c
 to the logical equivalent of the Java 8 functions (`Supplier`, `Function`, `Consumer`, respectively).
 While Spring Cloud Stream can support one or more Function instances in a Source as well as in a Sink (via function composition), we have three separate applications to demonstrate how each can work as an independent application.
 
-image::stream-applications-layered-architecture.png[]
+image::images/stream-applications-layered-architecture.png[]
 
 In this guide, we work from the back to the front. That is, we first build the Sink application, followed by the Processor, and
 finally build the Source. We use the RabbitMQ dashboard UI to test each component as we go.
@@ -79,11 +79,11 @@ include::name-sink/src/main/resources/application.properties[tag=sinkexchangecon
 
 To test the sink, we manually publish a JSON message representing a `Person` record to the newly generated exchange:
 
-image::rabbitmq-sink.png[]
+image::images/rabbitmq-sink.png[]
 
 Also, in our application logs we should see the data outputted:
 
-image::output-sink.png[]
+image::images/output-sink.png[]
 
 
 
@@ -114,11 +114,11 @@ NOTE: The output of the processor matches the input of the sink.
 
 Using the RabbitMQ dashboard, we can now send a String (name) to the processor input exchange and watch as it flows to the connected sink.
 
-image::rabbitmq-processor.png[]
+image::images/rabbitmq-processor.png[]
 
 If the processor and the sink are connected properly, you should see the output from your running sink:
 
-image::output-processor-sink.png[]
+image::images/output-processor-sink.png[]
 
 == Source Application
 

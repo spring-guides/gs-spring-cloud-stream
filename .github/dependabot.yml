@@ -1,0 +1,23 @@
+version: 2
+updates:
+
+  - package-ecosystem: "maven"
+    directories:
+      - "/name-processor"
+      - "/name-sink"
+      - "/name-source"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-patch"]
+    schedule:
+      interval: "monthly"
+    target-branch: "main"
+    groups:
+      guide-dependencies-maven:
+        patterns:
+          - "*"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
